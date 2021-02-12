@@ -5,9 +5,10 @@ import { StartComponent } from "./start.component";
 describe("pods/start/start.component specs", () => {
   it("should display title and button", () => {
     // Arrange
-
+    const mockFN = jest.fn();
+    const showStart = true;
     // Act
-    render(<StartComponent />);
+    render(<StartComponent onStart={mockFN} showStart={showStart} />);
 
     const title = screen.getByRole("heading");
     const button = screen.getByRole("button");
