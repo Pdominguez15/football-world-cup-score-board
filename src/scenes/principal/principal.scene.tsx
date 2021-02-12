@@ -1,9 +1,9 @@
 import React from "react";
-import { HelloWorld } from "pods/initial";
+import { BoardContainer } from "pods/board";
 export const PrincipalScene: React.FunctionComponent = () => {
   return (
     <>
-      <HelloWorld />
+      <BoardContainer />
     </>
   );
 };
