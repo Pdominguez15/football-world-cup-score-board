@@ -1,11 +1,13 @@
 import React from "react";
 import { Game } from "./game.vm";
+
 interface Props {
+  onUpdate: (id: number, homeScore: number, awayScore: number) => void;
   liveGames: Array<Game>;
 }
 
 export const LiveComponent: React.FunctionComponent<Props> = (props) => {
-  const { liveGames } = props;
+  const { onUpdate, liveGames } = props;
 
   const [showUpdate, setshowUpdate] = React.useState<number>(0);
   const [homeScore, sethomeScore] = React.useState<number>(0);
@@ -21,10 +23,15 @@ export const LiveComponent: React.FunctionComponent<Props> = (props) => {
 
   const handleSubmit = (event, id: number) => {
     event.preventDefault();
+    onUpdate(id, homeScore, awayScore);
     setshowUpdate(0);
   };
 
-  const handleUpdate = () => {};
+  const handleUpdate = (id: number, homeScore: number, awayScore: number) => {
+    setshowUpdate(id);
+    sethomeScore(homeScore);
+    setawayScore(awayScore);
+  };
 
   const handleFinish = () => {};
 
@@ -65,7 +72,12 @@ export const LiveComponent: React.FunctionComponent<Props> = (props) => {
             <li key={game.id}>
               {game.homeTeam} {game.homeScore} - {game.awayTeam}{" "}
               {game.awayScore}{" "}
-              <button name="update" onClick={() => handleUpdate()}>
+              <button
+                name="update"
+                onClick={() =>
+                  handleUpdate(game.id, game.homeScore, game.awayScore)
+                }
+              >
                 Update game
               </button>{" "}
               <button name="finish" onClick={() => handleFinish()}>

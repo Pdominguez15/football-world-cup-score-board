@@ -7,6 +7,7 @@ describe("pods/board/board.component specs", () => {
   it("should display a game when it is created", () => {
     // Arrange
     const onCreate = (homeTeam: string, awayTeam: string) => {};
+    const onUpdate = (id: number, homeScore: number, awayScore: number) => {};
     const liveGames = [
       {
         id: 1,
@@ -19,7 +20,13 @@ describe("pods/board/board.component specs", () => {
     ];
     const summaryGames = [];
     // Act
-    render(<BoardComponent onCreate={onCreate} liveGames={liveGames} />);
+    render(
+      <BoardComponent
+        onCreate={onCreate}
+        onUpdate={onUpdate}
+        liveGames={liveGames}
+      />
+    );
 
     const game = screen.getByRole("listitem");
     // Assert
@@ -28,6 +35,7 @@ describe("pods/board/board.component specs", () => {
       '<li>Home team test 0 - Away team test 0 <button name="update">Update game</button> <button name="finish">Finish game</button></li>'
     );
   });
+
   it("should display a updated game when it is updated", () => {
     // Arrange
     const onCreate = (homeTeam: string, awayTeam: string) => {};

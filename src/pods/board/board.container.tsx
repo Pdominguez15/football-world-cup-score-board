@@ -12,9 +12,23 @@ export const BoardContainer: React.FunctionComponent = () => {
     setlivesGamesMap([...livesGamesMap, newGame]);
   };
 
+  const handleUpdate = (id: number, homeScore: number, awayScore: number) => {
+    livesGamesMap.find((game) => {
+      if (game.id === id) {
+        game.homeScore = homeScore;
+        game.awayScore = awayScore;
+      }
+    });
+    setlivesGamesMap([...livesGamesMap]);
+  };
+
   return (
     <>
-      <BoardComponent onCreate={handleCreate} liveGames={livesGamesMap} />
+      <BoardComponent
+        onCreate={handleCreate}
+        onUpdate={handleUpdate}
+        liveGames={livesGamesMap}
+      />
     </>
   );
 };
