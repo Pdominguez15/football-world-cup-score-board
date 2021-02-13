@@ -9,6 +9,7 @@ describe("pods/board/board.component specs", () => {
     // Arrange
     const onCreate = (homeTeam: string, awayTeam: string) => {};
     const onUpdate = (id: number, homeScore: number, awayScore: number) => {};
+    const onFinish = (id: number) => {};
     const liveGames = [
       {
         id: 1,
@@ -19,7 +20,7 @@ describe("pods/board/board.component specs", () => {
         createDate: 1234,
       },
     ];
-    const onFinish = (id: number) => {};
+    const summaryGames = [];
     // Act
     render(
       <BoardComponent
@@ -27,6 +28,7 @@ describe("pods/board/board.component specs", () => {
         onUpdate={onUpdate}
         onFinish={onFinish}
         liveGames={liveGames}
+        summaryGames={summaryGames}
       />
     );
 
@@ -60,6 +62,7 @@ describe("pods/board/board.component specs", () => {
         createDate: 1234,
       },
     ];
+    const summaryGames = [];
     // Act
     render(
       <BoardComponent
@@ -67,6 +70,7 @@ describe("pods/board/board.component specs", () => {
         onUpdate={onUpdate}
         onFinish={onFinish}
         liveGames={liveGames}
+        summaryGames={summaryGames}
       />
     );
 
@@ -113,6 +117,7 @@ describe("pods/board/board.component specs", () => {
         createDate: 1234,
       },
     ];
+    const summaryGames = [];
     // Act
     render(
       <BoardComponent
@@ -120,6 +125,7 @@ describe("pods/board/board.component specs", () => {
         onUpdate={onUpdate}
         onFinish={onFinish}
         liveGames={liveGames}
+        summaryGames={summaryGames}
       />
     );
 

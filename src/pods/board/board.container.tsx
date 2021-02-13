@@ -6,10 +6,14 @@ export const BoardContainer: React.FunctionComponent = () => {
   const [livesGamesMap, setlivesGamesMap] = React.useState<Array<Game>>(
     new Array<Game>()
   );
+  const [summaryGamesMap, setsummaryGamesMap] = React.useState<Array<Game>>(
+    new Array<Game>()
+  );
 
   const handleCreate = (homeTeam: string, awayTeam: string) => {
     const newGame = createEmptyGame(homeTeam, awayTeam);
     setlivesGamesMap([...livesGamesMap, newGame]);
+    setsummaryGamesMap([...summaryGamesMap, newGame]);
   };
 
   const handleUpdate = (id: number, homeScore: number, awayScore: number) => {
@@ -20,6 +24,30 @@ export const BoardContainer: React.FunctionComponent = () => {
       }
     });
     setlivesGamesMap([...livesGamesMap]);
+
+    summaryGamesMap.find((game) => {
+      if (game.id === id) {
+        game.homeScore = homeScore;
+        game.awayScore = awayScore;
+      }
+    });
+    summaryGamesMap.sort((gameA: Game, gameB: Game) => {
+      const totalScoreA = gameA.homeScore + gameA.awayScore;
+      const totalScoreB = gameB.homeScore + gameB.awayScore;
+      if (totalScoreA > totalScoreB) {
+        return -1;
+      }
+      if (totalScoreA === totalScoreB) {
+        if (gameA.createDate > gameB.createDate) {
+          return 1;
+        } else {
+          return -1;
+        }
+      } else {
+        return 1;
+      }
+    });
+    setsummaryGamesMap([...summaryGamesMap]);
   };
 
   const handleFinish = (id: number) => {
@@ -36,6 +64,7 @@ export const BoardContainer: React.FunctionComponent = () => {
         onUpdate={handleUpdate}
         onFinish={handleFinish}
         liveGames={livesGamesMap}
+        summaryGames={summaryGamesMap}
       />
     </>
   );
