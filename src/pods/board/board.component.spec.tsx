@@ -90,4 +90,40 @@ describe("pods/board/board.component specs", () => {
       '<li>Home team test 2 - Away team test 3 <button name="update">Update game</button> <button name="finish">Finish game</button></li>'
     );
   });
+
+  it("should not display game when it is finished", () => {
+    // Arrange
+    const onCreate = (homeTeam: string, awayTeam: string) => {};
+    const onUpdate = (id: number, homeScore: number, awayScore: number) => {};
+    const onFinish = (id: number) => {
+      const indexDelete = liveGames.findIndex((game) => game.id === id);
+      liveGames.splice(indexDelete, 1);
+    };
+    const liveGames = [
+      {
+        id: 1,
+        homeTeam: "Home team test",
+        homeScore: 0,
+        awayTeam: "Away team test",
+        awayScore: 0,
+        createDate: 1234,
+      },
+    ];
+    // Act
+    render(
+      <BoardComponent
+        onCreate={onCreate}
+        onUpdate={onUpdate}
+        onFinish={onFinish}
+        liveGames={liveGames}
+      />
+    );
+
+    const finishGame = screen.getByRole("button", { name: /Finish game/ });
+    userEvent.click(finishGame);
+    const game = screen.queryByRole("listitem");
+
+    // Assert
+    expect(game).not.toBeInTheDocument();
+  });
 });
