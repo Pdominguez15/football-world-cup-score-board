@@ -3,11 +3,12 @@ import { Game } from "./game.vm";
 
 interface Props {
   onUpdate: (id: number, homeScore: number, awayScore: number) => void;
+  onFinish: (id: number) => void;
   liveGames: Array<Game>;
 }
 
 export const LiveComponent: React.FunctionComponent<Props> = (props) => {
-  const { onUpdate, liveGames } = props;
+  const { onUpdate, onFinish, liveGames } = props;
 
   const [showUpdate, setshowUpdate] = React.useState<number>(0);
   const [homeScore, sethomeScore] = React.useState<number>(0);
@@ -33,7 +34,10 @@ export const LiveComponent: React.FunctionComponent<Props> = (props) => {
     setawayScore(awayScore);
   };
 
-  const handleFinish = () => {};
+  const handleFinish = (id: number) => {
+    setshowUpdate(id);
+    onFinish(id);
+  };
 
   const handleCancel = (event) => {
     setshowUpdate(0);
@@ -80,7 +84,7 @@ export const LiveComponent: React.FunctionComponent<Props> = (props) => {
               >
                 Update game
               </button>{" "}
-              <button name="finish" onClick={() => handleFinish()}>
+              <button name="finish" onClick={() => handleFinish(game.id)}>
                 Finish game
               </button>
             </li>

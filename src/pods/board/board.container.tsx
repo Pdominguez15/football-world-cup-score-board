@@ -22,11 +22,19 @@ export const BoardContainer: React.FunctionComponent = () => {
     setlivesGamesMap([...livesGamesMap]);
   };
 
+  const handleFinish = (id: number) => {
+    const indexDelete = livesGamesMap.findIndex((game) => game.id === id);
+    livesGamesMap.splice(indexDelete, 1);
+
+    setlivesGamesMap([...livesGamesMap]);
+  };
+
   return (
     <>
       <BoardComponent
         onCreate={handleCreate}
         onUpdate={handleUpdate}
+        onFinish={handleFinish}
         liveGames={livesGamesMap}
       />
     </>

@@ -18,12 +18,13 @@ describe("pods/board/board.component specs", () => {
         createDate: 1234,
       },
     ];
-    const summaryGames = [];
+    const onFinish = (id: number) => {};
     // Act
     render(
       <BoardComponent
         onCreate={onCreate}
         onUpdate={onUpdate}
+        onFinish={onFinish}
         liveGames={liveGames}
       />
     );
@@ -47,6 +48,7 @@ describe("pods/board/board.component specs", () => {
         }
       });
     };
+    const onFinish = (id: number) => {};
     let liveGames = [
       {
         id: 1,
@@ -62,6 +64,7 @@ describe("pods/board/board.component specs", () => {
       <BoardComponent
         onCreate={onCreate}
         onUpdate={onUpdate}
+        onFinish={onFinish}
         liveGames={liveGames}
       />
     );
