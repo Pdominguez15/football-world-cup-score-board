@@ -13,7 +13,7 @@ describe("pods/board/board.component specs", () => {
         homeScore: 0,
         awayTeam: "Away team test",
         awayScore: 0,
-        updateDate: 1234,
+        createDate: 1234,
       },
     ];
     const summaryGames = [];
